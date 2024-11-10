@@ -5,8 +5,8 @@ import plotly.express as px
 from PIL import Image
 
 # Define paths for the images
-MAP_IMAGE_PATH = "data/map_image/Screenshot_2-11-2024_73055_browser.dataspace.copernicus.eu.jpeg"
-CLASSIFICATION_IMAGE_PATH = "data/map_image/2024-07-03-00_00_2024-07-03-23_59_Sentinel-2_L2A_Scene_classification_map_.png"
+MAP_IMAGE_PATH = "data/map_image/eu.jpeg"
+CLASSIFICATION_IMAGE_PATH = "data/map_image/classification_map_.png"
 MASK_OUTPUT_FOLDER = "output_results"
 
 # Define coordinates of area of interest
