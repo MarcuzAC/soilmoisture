@@ -1,21 +1,8 @@
 import os
 import streamlit as st
 import pandas as pd
-import plotly.graph_objs as go
 import plotly.express as px
-from pymongo import MongoClient
-import re
 from PIL import Image
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
-
-# MongoDB connection configuration
-MONGO_URI = os.getenv("MONGO_URI")  # Store MongoDB URI in .env file
-client = MongoClient(MONGO_URI)
-db = client['moisture_results']  # Replace with your database name
-moisture_collection = db['moisture_results']  # Replace with your collection name
 
 # Define paths for the images
 MAP_IMAGE_PATH = "data/map_image/Screenshot_2-11-2024_73055_browser.dataspace.copernicus.eu.jpeg"
@@ -31,13 +18,18 @@ COORDINATES = [
 
 # Function to fetch and process data
 def fetch_data():
-    # Fetch data from MongoDB
-    cursor = moisture_collection.find({}, {"_id": 0, "image_name": 1, "dry_percentage": 1, "normal_percentage": 1, "wet_percentage": 1, "condition_summary": 1})
-    df = pd.DataFrame(list(cursor))
+    # Sample data (Replace with your actual data)
+    data = {
+        "image_name": ["2024-01-01_image", "2024-02-01_image", "2024-03-01_image"],
+        "dry_percentage": [10, 15, 20],
+        "normal_percentage": [70, 65, 60],
+        "wet_percentage": [20, 20, 20],
+        "condition_summary": ["Normal", "Dry", "Wet"]
+    }
+    df = pd.DataFrame(data)
     
     # Extract and process date information
-    df['date'] = df['image_name'].apply(lambda x: re.search(r"\d{4}-\d{2}-\d{2}", x).group() if re.search(r"\d{4}-\d{2}-\d{2}", x) else None)
-    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    df['date'] = pd.to_datetime(df['image_name'].apply(lambda x: x.split('_')[0]), errors='coerce')
     df = df.dropna(subset=['date'])
     df = df.sort_values(by='date')
     df.set_index('date', inplace=True)
