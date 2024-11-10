@@ -1,0 +1,34 @@
+# Python bytecode files
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtual environment directories
+venv/
+env/
+
+# Node.js dependencies
+node_modules/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Environment variables
+.env
+
+# MacOS-specific files
+.DS_Store
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Build directories
+build/
+dist/
+
+# MongoDB data directory (if applicable)
+data/
